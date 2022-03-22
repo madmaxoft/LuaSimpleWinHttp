@@ -43,11 +43,12 @@ resp, statusCode, _, headers = assert(lswh.post(
 ## Compiling
 The library currently supports only static linking - that is, if you're embedding a Lua interpreter to an application, you can add this library. It is currently not possible to make a DLL for generic Lua interpreter.
 
-The compilation uses standard CMake process and requires a C++17 compiler (tested only with VS 2019). It requires that the Lua library is already present in the build system as a `lua` target.
+The compilation uses standard CMake process and requires a C++17 compiler (tested only with VS 2019). It requires that the Lua library is already present in the build system as a `lua` target. It also requires the [{fmt}](https://github.com/fmtlib/fmt) library present in the build system, providing the `fmt::fmt-header-only` target
 
 ```
 # Application's CMakeLists.txt
 add_directory(lib/lua)
+add_directory(lib/fmt)
 add_directory(lib/LuaSimpleWinHttp)
 
 target_link_libraries(App LuaSimpleWinHttp)
