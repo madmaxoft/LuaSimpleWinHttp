@@ -295,7 +295,8 @@ void Request::pushHeaders(const std::string & aAllHeaders)
 				if (i > idxStart)  // Do not push empty headers
 				{
 					lua_pushlstring(mState, aAllHeaders.data() + idxStart, i - idxStart);
-					lua_seti(mState, -2, ++num);
+					auto name = fmt::format("{}", ++num);
+					lua_setfield(mState, -2, name.c_str());
 				}
 			}
 			idxStart = i + 2;
@@ -407,7 +408,8 @@ void Request::readParamsHeaders(int aParamsStackPos)
 	}
 	for (int i = 1;;++i)
 	{
-		auto type = lua_geti(mState, -1, i);
+		auto name = fmt::format("{}", i);
+		auto type = lua_getfield(mState, -1, name.c_str());
 		LuaPopper popV(mState);
 		switch (type)
 		{
