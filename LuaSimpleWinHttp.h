@@ -6,7 +6,7 @@ extern "C" {
 
 #include <lua.h>
 
-int luaopen_LuaSimpleWinHttp(lua_State * aState);
+LUALIB_API int luaopen_LuaSimpleWinHttp(lua_State * aState);
 
 #ifdef __cplusplus
 }

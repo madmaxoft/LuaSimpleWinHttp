@@ -13,7 +13,34 @@ if(MSVC)
 	add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE)
 endif()
 
-add_library(LuaSimpleWinHttp STATIC
+
+
+
+
+# Static library:
+add_library(LuaSimpleWinHttp-static STATIC
+	LuaSimpleWinHttp.cpp
+	LuaSimpleWinHttp.h
+	Request.cpp
+	Request.h
+)
+
+target_link_libraries(LuaSimpleWinHttp-static
+	fmt::fmt-header-only
+	lua-static
+	winhttp
+)
+
+target_include_directories(LuaSimpleWinHttp-static
+	SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+
+
+
+
+# Dynamic library:
+add_library(LuaSimpleWinHttp SHARED
 	LuaSimpleWinHttp.cpp
 	LuaSimpleWinHttp.h
 	Request.cpp

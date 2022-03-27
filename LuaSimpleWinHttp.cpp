@@ -1,3 +1,4 @@
+#define LUA_LIB
 #include "LuaSimpleWinHttp.h"
 
 extern "C"
@@ -157,7 +158,7 @@ static const struct luaL_Reg lswhlib[] =
 
 
 
-int luaopen_LuaSimpleWinHttp(lua_State * aState)
+LUALIB_API int luaopen_LuaSimpleWinHttp(lua_State * aState)
 {
 	luaL_openlib(aState, "LuaSimpleWinHttp", lswhlib, 0);
 	return 1;
