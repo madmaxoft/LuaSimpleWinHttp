@@ -408,9 +408,10 @@ void Request::readParamsHeaders(int aParamsStackPos)
 	}
 	for (int i = 1;;++i)
 	{
-		auto name = fmt::format("{}", i);
-		auto type = lua_getfield(mState, -1, name.c_str());
+		lua_pushinteger(mState, i);
 		LuaPopper popV(mState);
+		lua_gettable(mState, -2);
+		auto type = lua_type(mState, -1);
 		switch (type)
 		{
 			case LUA_TNIL:
